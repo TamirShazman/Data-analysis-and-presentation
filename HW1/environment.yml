@@ -1,0 +1,8 @@
+name: hw1_env
+depedencies:
+  - python=3.11.3
+  - pip=23.0.1:
+  - pip:
+    - pandas=1.5.3
+    - tqdm=4.65.0
+    - pytorch=1.13.1
