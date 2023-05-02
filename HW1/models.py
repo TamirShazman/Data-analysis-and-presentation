@@ -332,4 +332,33 @@ def post_analysis(ds, col, model, change_val_fun, graph_name):
 
     return f1_vals
 
+def post_analysis_subgroups(ds1, ds2, model, graph_name1, graph_name2):
+    df1 = ds1.df.copy()
+    ds1 = LSTMDataset(df1)
 
+    df2 = ds2.df.copy()
+    ds2 = LSTMDataset(df2)
+
+    f1_vals = {graph_name1: None, graph_name1: None}
+    y_pred_list, y_gt_list, id_list = predict(model, ds1)
+
+    cm = confusion_matrix(y_gt_list, y_pred_list)
+    f = sns.heatmap(cm, annot=True, fmt='d')
+    fig = f.get_figure()
+    fig.savefig(f'/home/student/Data-analysis-and-presentation/HW1/graphs/{graph_name1}.png')
+    plt.close(fig)
+
+    f1_vals[graph_name1] = f1_score(y_pred_list, y_gt_list)
+
+    y_pred_list, y_gt_list, id_list = predict(model, ds2)
+
+    f1_vals[graph_name2] = f1_score(y_pred_list, y_gt_list)
+
+    cm = confusion_matrix(y_gt_list, y_pred_list)
+    f = sns.heatmap(cm, annot=True, fmt='d')
+    fig = f.get_figure()
+    fig.savefig(f'/home/student/Data-analysis-and-presentation/HW1/graphs/{graph_name2}.png')
+    plt.close(fig)
+
+
+    return f1_vals
