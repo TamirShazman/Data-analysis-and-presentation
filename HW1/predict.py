@@ -109,7 +109,7 @@ def preprocess_data(test_folder_path):
     
 def main():
     test_path = sys.argv[-1]
-    training_data_path = '/home/student/Data-analysis-and-presentation/HW1/train_data_with_na.pkl'
+    training_data_path = 'weights/train_data_with_na.pkl'
 
     df_train = pd.read_pickle(training_data_path)
     df_test = preprocess_data(test_path)
@@ -120,7 +120,7 @@ def main():
     test_ds = LSTMDataset(df_test)
 
     model_concat = LSTMNet(type='concat')
-    model_concat.load_state_dict(torch.load('/home/student/Data-analysis-and-presentation/HW1/weights/concat_0.69.pt'))
+    model_concat.load_state_dict(torch.load('weights/concat_0.69.pt'))
 
     y_pred_list, y_gt_list, id_list = predict(model_concat, test_ds)
 
