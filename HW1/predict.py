@@ -123,6 +123,7 @@ def main():
     model_concat.load_state_dict(torch.load('weights/concat_0.69.pt'))
 
     y_pred_list, y_gt_list, id_list = predict(model_concat, test_ds)
+    id_list = [f'patient_{id}' for id in id_list]
 
     pred_df = pd.DataFrame(data={'id': id_list, 'prediction': y_pred_list})
     pred_df.to_csv('prediction.csv', index=False)
