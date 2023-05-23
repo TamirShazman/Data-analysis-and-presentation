@@ -23,7 +23,7 @@ def preprocess_data(test_folder_path):
     for file in tqdm(glob(from_dir + '/patient_*.psv')):
         temp_df = pd.read_csv(file, sep='|')
         # get patient ID
-        patient_ID = file[ file.find("_")+1 : file.find(".") ]
+        patient_ID = file[ file.find("patient_") : file.find(".psv") ]
 
         if  temp_df.SepsisLabel.sum() > 0:
             first_sepsis_row = temp_df.shape[0] - temp_df.SepsisLabel.sum()
@@ -123,7 +123,6 @@ def main():
     model_concat.load_state_dict(torch.load('weights/concat_0.69.pt'))
 
     y_pred_list, y_gt_list, id_list = predict(model_concat, test_ds)
-    id_list = [f'patient_{id}' for id in id_list]
 
     pred_df = pd.DataFrame(data={'id': id_list, 'prediction': y_pred_list})
     pred_df.to_csv('prediction.csv', index=False)

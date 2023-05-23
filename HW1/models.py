@@ -54,7 +54,7 @@ class LSTMDataset(Dataset):
         x2_val = torch.from_numpy(self.df.loc[idx][self.x2_col].values.astype(float)).type(torch.float)
         x1_len = self.df.loc[idx]['Final ICULOS']
         label = self.df.loc[idx][self.label_col]
-        id = int(self.df.loc[idx][self.id_col])
+        id = self.df.loc[idx][self.id_col]
         return x1_len, self.stack_x1(x1_val), x2_val, torch.from_numpy(label.values.astype(int)), id
     
 
