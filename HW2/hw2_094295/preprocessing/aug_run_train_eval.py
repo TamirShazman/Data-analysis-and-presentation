@@ -7,9 +7,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torchvision
 from torch.optim import lr_scheduler
-from torchvision import datasets, models, transforms
+from torchvision import models
 from tqdm import tqdm
 
 def imshow(inp, title=None):
@@ -128,7 +127,7 @@ def train_fold(train_dl, val_dl, test_dl, num_epochs, lr, num_of_classes, exp_pa
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     dataloaders = {'train': train_dl, 'val': val_dl}
-    dataset_sizes = {'train': len(train_dl.dataset), 'val': len(val_dl.dataset)}
+    dataset_sizes = {'train': 8000, 'val': len(val_dl.dataset)}
 
 
     # Use a prebuilt pytorch's ResNet50 model

@@ -36,7 +36,7 @@ BATCH_SIZE = 16
 NUM_EPOCHS = 15 #500
 LR = 0.001
 
-base_dir = os.path.join("..", "data")
+base_dir = os.path.join("..", "final_data")
 train_dir = os.path.join(base_dir, "train")
 val_dir = os.path.join(base_dir, "val")
 
@@ -201,3 +201,4 @@ plt.xlabel('num_epochs', fontsize=12)
 plt.ylabel('ACC', fontsize=12)
 plt.legend(loc='best')
 plt.savefig(os.path.join(figures_dir, 'train_val_acc_plot.png'))
+
